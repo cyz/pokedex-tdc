@@ -1,4 +1,4 @@
- # Pokédex Nacional
+ # Pokédex
 
  Pokédex responsiva construída com Next.js 15, React 19, TypeScript e Tailwind CSS 3. A aplicação consulta a [PokéAPI](https://pokeapi.co/) no servidor para listar, buscar e filtrar Pokémon, além de exibir detalhes de cada registro.
 
@@ -68,7 +68,3 @@
  - `GET /api/v2/pokemon-species/{id-or-name}`
  - `GET /api/v2/type`
  - `GET /api/v2/type/{id-or-name}`
-
- ## Escopo
-
- O MVP não inclui favoritos, comparação, autenticação ou persistência no navegador. Nomes e dados oficiais são mantidos conforme retornados pela PokéAPI; os rótulos estruturais da interface estão em português.
