@@ -74,6 +74,10 @@ export function filterPokemonResources(
   const normalizedQuery = query.trim().toLocaleLowerCase().replace(/\s+/g, "-");
   const selectedGeneration = GENERATIONS.find(({ id }) => id === generation);
 
+  if (generation && !selectedGeneration) {
+    return [];
+  }
+
   return resources
     .filter(({ name, url }) => {
       const id = extractResourceId(url);

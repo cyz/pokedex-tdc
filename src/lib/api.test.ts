@@ -37,6 +37,14 @@ describe("PokéAPI helpers", () => {
     ]);
   });
 
+  it("não retorna recursos para uma geração inválida", () => {
+    const resources = [
+      { name: "bulbasaur", url: "https://pokeapi.co/api/v2/pokemon/1/" },
+    ];
+
+    expect(filterPokemonResources(resources, "", "0")).toEqual([]);
+  });
+
   it("normaliza nomes e textos retornados pela API", () => {
     expect(formatResourceName("mr-mime")).toBe("Mr Mime");
     expect(normalizeFlavorText("Uma linha\ncom\f espaços.")).toBe(
