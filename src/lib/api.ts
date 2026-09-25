@@ -1,4 +1,5 @@
 import {
+  GENERATIONS,
   INITIAL_PAGE_SIZE,
   MAX_VISIBLE_POKEMON,
   POKE_API_REVALIDATE_SECONDS,
@@ -68,11 +69,22 @@ export function normalizeFlavorText(text: string): string {
 export function filterPokemonResources(
   resources: NamedApiResource[],
   query: string,
+  generation = "",
 ): NamedApiResource[] {
   const normalizedQuery = query.trim().toLocaleLowerCase().replace(/\s+/g, "-");
+  const selectedGeneration = GENERATIONS.find(({ id }) => id === generation);
 
   return resources
-    .filter(({ name }) => name.toLocaleLowerCase().includes(normalizedQuery))
+    .filter(({ name, url }) => {
+      const id = extractResourceId(url);
+      return (
+        name.toLocaleLowerCase().includes(normalizedQuery) &&
+        (generation === "" ||
+          (selectedGeneration !== undefined &&
+            id >= selectedGeneration.startId &&
+            id <= selectedGeneration.endId))
+      );
+    })
     .sort((first, second) => extractResourceId(first.url) - extractResourceId(second.url));
 }
 
@@ -123,10 +135,11 @@ export async function getPokemonSpecies(
 export async function getPokemonCatalog({
   query = "",
   type = "",
+  generation = "",
   limit = INITIAL_PAGE_SIZE,
 }: CatalogOptions = {}): Promise<PokemonCatalog> {
   const resources = type ? await getPokemonByType(type) : await getPokemonIndex();
-  const filtered = filterPokemonResources(resources, query);
+  const filtered = filterPokemonResources(resources, query, generation);
   const safeLimit = Math.min(
     Math.max(Math.trunc(limit) || INITIAL_PAGE_SIZE, INITIAL_PAGE_SIZE),
     MAX_VISIBLE_POKEMON,

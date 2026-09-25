@@ -4,6 +4,18 @@ export const INITIAL_PAGE_SIZE = 24;
 export const PAGE_INCREMENT = 24;
 export const MAX_VISIBLE_POKEMON = 240;
 
+export const GENERATIONS = [
+  { id: "1", name: "Kanto", startId: 1, endId: 151 },
+  { id: "2", name: "Johto", startId: 152, endId: 251 },
+  { id: "3", name: "Hoenn", startId: 252, endId: 386 },
+  { id: "4", name: "Sinnoh", startId: 387, endId: 493 },
+  { id: "5", name: "Unova", startId: 494, endId: 649 },
+  { id: "6", name: "Kalos", startId: 650, endId: 721 },
+  { id: "7", name: "Alola", startId: 722, endId: 809 },
+  { id: "8", name: "Galar", startId: 810, endId: 905 },
+  { id: "9", name: "Paldea", startId: 906, endId: 1025 },
+] as const;
+
 export const TYPE_LABELS: Record<string, string> = {
   normal: "Normal",
   fire: "Fogo",

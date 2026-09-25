@@ -6,7 +6,7 @@ const push = jest.fn();
 
 jest.mock("next/navigation", () => ({
   useRouter: () => ({ push }),
-  useSearchParams: () => new URLSearchParams("q=pika&type=electric"),
+  useSearchParams: () => new URLSearchParams("q=pika&type=electric&generation=1"),
 }));
 
 describe("LoadMoreButton", () => {
@@ -20,7 +20,7 @@ describe("LoadMoreButton", () => {
 
     await user.click(screen.getByRole("button", { name: "Carregar mais" }));
 
-    expect(push).toHaveBeenCalledWith("/?q=pika&type=electric&limit=48", {
+    expect(push).toHaveBeenCalledWith("/?q=pika&type=electric&generation=1&limit=48", {
       scroll: false,
     });
   });
