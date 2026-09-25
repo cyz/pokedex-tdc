@@ -12,7 +12,7 @@ export const GENERATIONS = [
   { id: "5", name: "Unova", startId: 494, endId: 649 },
   { id: "6", name: "Kalos", startId: 650, endId: 721 },
   { id: "7", name: "Alola", startId: 722, endId: 809 },
-  { id: "8", name: "Galar", startId: 810, endId: 898 },
+  { id: "8", name: "Galar", startId: 810, endId: 905 },
   { id: "9", name: "Paldea", startId: 906, endId: 1025 },
 ] as const;
 

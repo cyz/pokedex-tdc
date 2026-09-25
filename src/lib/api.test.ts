@@ -54,6 +54,9 @@ describe("PokéAPI helpers", () => {
     expect(filterPokemonResources(resources, "", "9").map(({ name }) => name)).toEqual([
       "sprigatito",
     ]);
+    expect(filterPokemonResources(resources, "", "8").map(({ name }) => name)).toEqual([
+      "enamorus",
+    ]);
   });
 
   it("normaliza nomes e textos retornados pela API", () => {
