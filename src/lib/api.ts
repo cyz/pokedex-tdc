@@ -74,17 +74,15 @@ export function filterPokemonResources(
   const normalizedQuery = query.trim().toLocaleLowerCase().replace(/\s+/g, "-");
   const selectedGeneration = GENERATIONS.find(({ id }) => id === generation);
 
-  if (generation && !selectedGeneration) {
-    return [];
-  }
-
   return resources
     .filter(({ name, url }) => {
       const id = extractResourceId(url);
       return (
         name.toLocaleLowerCase().includes(normalizedQuery) &&
-        (!selectedGeneration ||
-          (id >= selectedGeneration.startId && id <= selectedGeneration.endId))
+        (generation === "" ||
+          (selectedGeneration !== undefined &&
+            id >= selectedGeneration.startId &&
+            id <= selectedGeneration.endId))
       );
     })
     .sort((first, second) => extractResourceId(first.url) - extractResourceId(second.url));
