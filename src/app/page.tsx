@@ -12,6 +12,7 @@ interface HomeProps {
   searchParams: Promise<{
     q?: string;
     type?: string;
+    generation?: string;
     limit?: string;
   }>;
 }
@@ -20,12 +21,13 @@ export default async function Home({ searchParams }: HomeProps) {
   const params = await searchParams;
   const query = params.q?.trim() ?? "";
   const type = params.type?.trim() ?? "";
+  const generation = params.generation?.trim() ?? "";
   const parsedLimit = Number.parseInt(params.limit ?? "", 10);
   const limit = Number.isFinite(parsedLimit)
     ? Math.min(Math.max(parsedLimit, INITIAL_PAGE_SIZE), MAX_VISIBLE_POKEMON)
     : INITIAL_PAGE_SIZE;
   const [catalog, types] = await Promise.all([
-    getPokemonCatalog({ query, type, limit }),
+    getPokemonCatalog({ query, type, generation, limit }),
     getPokemonTypes(),
   ]);
 
@@ -46,7 +48,12 @@ export default async function Home({ searchParams }: HomeProps) {
       </header>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <PokemonFilters query={query} selectedType={type} types={types} />
+        <PokemonFilters
+          query={query}
+          selectedType={type}
+          selectedGeneration={generation}
+          types={types}
+        />
 
         <section className="pt-9" aria-labelledby="catalog-title">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-3">

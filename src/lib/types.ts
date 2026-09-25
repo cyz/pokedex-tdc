@@ -90,5 +90,6 @@ export interface PokemonCatalog {
 export interface CatalogOptions {
   query?: string;
   type?: string;
+  generation?: string;
   limit?: number;
 }
