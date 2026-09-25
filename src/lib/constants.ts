@@ -13,7 +13,7 @@ export const GENERATIONS = [
   { id: "6", name: "Kalos", startId: 650, endId: 721 },
   { id: "7", name: "Alola", startId: 722, endId: 809 },
   { id: "8", name: "Galar", startId: 810, endId: 898 },
-  { id: "9", name: "Paldea", startId: 899, endId: 1025 },
+  { id: "9", name: "Paldea", startId: 906, endId: 1025 },
 ] as const;
 
 export const TYPE_LABELS: Record<string, string> = {

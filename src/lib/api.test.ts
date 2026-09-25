@@ -45,6 +45,17 @@ describe("PokéAPI helpers", () => {
     expect(filterPokemonResources(resources, "", "0")).toEqual([]);
   });
 
+  it("inicia Paldea no primeiro ID de sua Pokédex Nacional", () => {
+    const resources = [
+      { name: "enamorus", url: "https://pokeapi.co/api/v2/pokemon/905/" },
+      { name: "sprigatito", url: "https://pokeapi.co/api/v2/pokemon/906/" },
+    ];
+
+    expect(filterPokemonResources(resources, "", "9").map(({ name }) => name)).toEqual([
+      "sprigatito",
+    ]);
+  });
+
   it("normaliza nomes e textos retornados pela API", () => {
     expect(formatResourceName("mr-mime")).toBe("Mr Mime");
     expect(normalizeFlavorText("Uma linha\ncom\f espaços.")).toBe(
